@@ -192,6 +192,4 @@ python main.py -a list -m Group
 # Update teacher with id=3
 python main.py -a update -m Teacher --id 3 -n "Andry Bezos"
 
-# Delete group
-python main.py -a remove -m Group --id 2
 ```
