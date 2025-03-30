@@ -142,12 +142,14 @@ python -m venv venv
 
 ## 2️⃣ Activate the Virtual Environment  
 
-- **Windows (CMD):**  
-  ```cmd
-  venv\Scripts\activate
-  ```
+**Windows (CMD):**  
+
+```cmd
+venv\Scripts\activate
+```
 
 ## 3️⃣ Install Dependencies  
+
 ```bash
 pip install -r requirements.txt
 ```
