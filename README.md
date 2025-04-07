@@ -142,12 +142,14 @@ python -m venv venv
 
 ## 2️⃣ Activate the Virtual Environment  
 
-- **Windows (CMD):**  
-  ```cmd
-  venv\Scripts\activate
-  ```
+**Windows (CMD):**  
+
+```cmd
+venv\Scripts\activate
+```
 
 ## 3️⃣ Install Dependencies  
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -190,6 +192,4 @@ python main.py -a list -m Group
 # Update teacher with id=3
 python main.py -a update -m Teacher --id 3 -n "Andry Bezos"
 
-# Delete group
-python main.py -a remove -m Group --id 2
 ```
