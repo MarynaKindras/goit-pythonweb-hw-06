@@ -1,16 +1,17 @@
-import random
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from datetime import datetime, timedelta
 from faker import Faker
-from models import Base, Group, Student, Teacher, Subject, Grade
+from db.db import engine
+from db.models import Base, Group, Student, Teacher, Subject, Grade
+from db.db import session
+import random
 
 fake = Faker()
 
-DATABASE_URL = "postgresql://postgres:password@localhost:5432/postgres"
-engine = create_engine(DATABASE_URL)
-Session = sessionmaker(bind=engine)
-session = Session()
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 def clear_data():

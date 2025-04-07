@@ -169,27 +169,60 @@ alembic revision --autogenerate -m "Initial migration"
 ## 6️⃣ Filling the database with data
 
 ```bash
-python seed.py
+python -m seeds.seed
 ```
 
 ## 7️⃣ Executing queries
 
 ```bash
-python ./my_select.py
+python -m queries.my_select
 ```
 
 ---
 
-## 8️⃣ CLI CRUD access to the database
+## 📂 Структура проєкту
+
+```
+goit-pythonweb-hw-06-main/
+├── db/
+│   ├── db.py           # Підключення до бази через .env
+│   └── models.py       # SQLAlchemy моделі
+├── cli/
+│   └── main.py         # CLI інтерфейс
+├── queries/
+│   └── my_select.py    # Вибірки з бази
+├── seeds/
+│   └── seed.py         # Наповнення тестовими даними
+├── .env                # Налаштування підключення до БД
+├── README.md           # Інструкція
+├── requirements.txt    # Залежності
+```
+
+## 🧪 Приклади CLI команд
 
 ```bash
-# Create a teacher
-python main.py -a create -m Teacher -n "Boris Jonson"
+# 👨‍🏫 Teachers
+python -m cli.main add_teacher -n "John Smith"
+python -m cli.main list_teachers
 
-# Show all groups
-python main.py -a list -m Group
+# 👥 Groups
+python -m cli.main add_group -n "Group A"
+python -m cli.main list_groups
 
-# Update teacher with id=3
-python main.py -a update -m Teacher --id 3 -n "Andry Bezos"
+# 🧑‍🎓 Students
+python -m cli.main add_student -n "Alice" --group_id 1
+python -m cli.main list_students
 
+# 📚 Subjects
+python -m cli.main add_subject -n "Math" --teacher_id 1
+python -m cli.main list_subjects
+
+# 📝 Grades
+python -m cli.main add_grade --student_id 1 --subject_id 1 --grade 5
+python -m cli.main list_grades
+
+## 🔐 .env формат
+
+```
+DATABASE_URL=postgresql://postgres:твій_пароль@localhost:5432/postgres
 ```

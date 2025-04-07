@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float
 from sqlalchemy.orm import declarative_base, relationship
+from datetime import date
 
 Base = declarative_base()
 
@@ -51,7 +52,7 @@ class Grade(Base):
     student_id = Column(Integer, ForeignKey('students.id'))
     subject_id = Column(Integer, ForeignKey('subjects.id'))
     grade = Column(Float, nullable=False)
-    date_received = Column(Date, nullable=False)
+    date_received = Column(Date, nullable=False, default=date.today)
 
     student = relationship('Student', back_populates='grades')
     subject = relationship('Subject', back_populates='grades')

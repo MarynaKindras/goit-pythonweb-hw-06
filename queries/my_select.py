@@ -1,17 +1,13 @@
-from sqlalchemy import create_engine, func
-from sqlalchemy.orm import sessionmaker
-from models import Student, Grade, Subject, Teacher, Group
-from sqlalchemy.sql import select
+from db.db import session
+from db.models import Student, Grade, Subject, Teacher, Group
+from sqlalchemy import func
 
 # 🔗 Налаштування БД
 DATABASE_URL = "postgresql://postgres:password@localhost:5432/postgres"
-engine = create_engine(DATABASE_URL)
-Session = sessionmaker(bind=engine)
 
 
 def select_1():
     """Знайти 5 студентів із найбільшим середнім балом з усіх предметів."""
-    session = Session()
     result = (
         session.query(Student.name, func.avg(Grade.grade).label("avg_grade"))
         .join(Grade)
@@ -26,7 +22,6 @@ def select_1():
 
 def select_2(subject_id):
     """Знайти студента із найвищим середнім балом з певного предмета."""
-    session = Session()
     result = (
         session.query(Student.name, func.avg(Grade.grade).label("avg_grade"))
         .join(Grade)
@@ -41,7 +36,6 @@ def select_2(subject_id):
 
 def select_3(subject_id):
     """Знайти середній бал у групах з певного предмета."""
-    session = Session()
     result = (
         session.query(Group.name, func.avg(Grade.grade).label("avg_grade"))
         .join(Student, Student.group_id == Group.id)
@@ -56,7 +50,6 @@ def select_3(subject_id):
 
 def select_4():
     """Знайти середній бал на потоці (по всій таблиці оцінок)."""
-    session = Session()
     result = session.query(func.avg(Grade.grade)).scalar()
     session.close()
     return result
@@ -64,7 +57,6 @@ def select_4():
 
 def select_5(teacher_id):
     """Знайти які курси читає певний викладач."""
-    session = Session()
     result = (
         session.query(Subject.name)
         .filter(Subject.teacher_id == teacher_id)
@@ -76,7 +68,6 @@ def select_5(teacher_id):
 
 def select_6(group_id):
     """Знайти список студентів у певній групі."""
-    session = Session()
     result = (
         session.query(Student.name)
         .filter(Student.group_id == group_id)
@@ -88,7 +79,6 @@ def select_6(group_id):
 
 def select_7(group_id, subject_id):
     """Знайти оцінки студентів у окремій групі з певного предмета."""
-    session = Session()
     result = (
         session.query(Student.name, Grade.grade)
         .join(Grade)
@@ -101,7 +91,6 @@ def select_7(group_id, subject_id):
 
 def select_8(teacher_id):
     """Знайти середній бал, який ставить певний викладач зі своїх предметів."""
-    session = Session()
     result = (
         session.query(func.avg(Grade.grade))
         .join(Subject, Grade.subject_id == Subject.id)
@@ -114,7 +103,6 @@ def select_8(teacher_id):
 
 def select_9(student_id):
     """Знайти список курсів, які відвідує певний студент."""
-    session = Session()
     result = (
         session.query(Subject.name)
         .join(Grade)
@@ -128,7 +116,6 @@ def select_9(student_id):
 
 def select_10(student_id, teacher_id):
     """Список курсів, які певному студенту читає певний викладач."""
-    session = Session()
     result = (
         session.query(Subject.name)
         .join(Grade)
@@ -142,7 +129,6 @@ def select_10(student_id, teacher_id):
 
 def select_11(teacher_id, student_id):
     """Середній бал, який певний викладач ставить певному студентові."""
-    session = Session()
     result = (
         session.query(func.avg(Grade.grade))
         .join(Subject)
@@ -155,7 +141,6 @@ def select_11(teacher_id, student_id):
 
 def select_12(group_id, subject_id):
     """Оцінки студентів у певній групі з певного предмета на останньому занятті."""
-    session = Session()
     subquery = (
         session.query(
             Grade.student_id,
