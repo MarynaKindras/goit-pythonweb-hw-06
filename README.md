@@ -159,7 +159,7 @@ pip install -r requirements.txt
 ```bash
 docker run --name hw-06 -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres
 ```
-
+docker run --name db-hw-6 -p 5432:5432 -e POSTGRES_PASSWORD=567234 -d postgres
 ## 5️⃣ Creating an Alembic Migration
 
 ```bash
@@ -201,28 +201,23 @@ goit-pythonweb-hw-06-main/
 ## 🧪 Приклади CLI команд
 
 ```bash
-# 👨‍🏫 Teachers
+👨‍🏫 Teachers
 python -m cli.main add_teacher -n "John Smith"
 python -m cli.main list_teachers
 
-# 👥 Groups
+👥 Groups
 python -m cli.main add_group -n "Group A"
 python -m cli.main list_groups
 
-# 🧑‍🎓 Students
+🧑‍🎓 Students
 python -m cli.main add_student -n "Alice" --group_id 1
 python -m cli.main list_students
 
-# 📚 Subjects
+📚 Subjects
 python -m cli.main add_subject -n "Math" --teacher_id 1
 python -m cli.main list_subjects
 
-# 📝 Grades
+📝 Grades
 python -m cli.main add_grade --student_id 1 --subject_id 1 --grade 5
 python -m cli.main list_grades
-
-## 🔐 .env формат
-
-```
-DATABASE_URL=postgresql://postgres:твій_пароль@localhost:5432/postgres
 ```

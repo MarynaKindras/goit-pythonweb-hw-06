@@ -2,10 +2,6 @@ from db.db import session
 from db.models import Student, Grade, Subject, Teacher, Group
 from sqlalchemy import func
 
-# 🔗 Налаштування БД
-DATABASE_URL = "postgresql://postgres:password@localhost:5432/postgres"
-
-
 def select_1():
     """Знайти 5 студентів із найбільшим середнім балом з усіх предметів."""
     result = (
@@ -151,12 +147,11 @@ def select_12(group_id, subject_id):
         .group_by(Grade.student_id)
         .subquery()
     )
-
     result = (
         session.query(Student.name, Grade.grade)
         .join(Grade)
         .join(subquery, (Grade.student_id == subquery.c.student_id) &
-                        (Grade.date_received == subquery.c.last_date))
+              (Grade.date_received == subquery.c.last_date))
         .all()
     )
     session.close()
@@ -177,7 +172,7 @@ def run_all_queries():
         ("🎒 Subjects by student", select_9, [1]),
         ("👨‍🏫📘 Subjects by student + teacher", select_10, [1, 1]),
         ("📈 Avg grade from teacher to student", select_11, [1, 1]),
-        ("⏱ Last grades in group + subject", select_12, [1, 1]),
+        ("⏱️ Last grades in group + subject", select_12, [1, 1]),
     ]
 
     for i, (description, func_select, args) in enumerate(queries, start=1):
@@ -193,7 +188,6 @@ def run_all_queries():
         else:
             print("  ⚠️  Немає даних")
     print("—" * 50)
-
 
 if __name__ == "__main__":
     run_all_queries()
