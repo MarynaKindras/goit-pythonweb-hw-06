@@ -159,7 +159,7 @@ pip install -r requirements.txt
 ```bash
 docker run --name hw-06 -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres
 ```
-docker run --name db-hw-6 -p 5432:5432 -e POSTGRES_PASSWORD=567234 -d postgres
+
 ## 5️⃣ Creating an Alembic Migration
 
 ```bash
